@@ -4,543 +4,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Apex Legal Counsel - Trusted Attorneys at Law. Strategic, Aggressive & Result-Oriented Corporate & Criminal Defense Counsel.">
-    <title>Apex Legal Counsel | Trusted Law Firm & Legal Consultants</title>
-    
+    <meta name="description" content="Apex Legal Counsel - Trusted Law Firm & Legal Consultants. Corporate Law, Criminal Defense, Family Estate, & Civil Litigation.">
+    <title>Apex Legal | Trusted Law Firm & Legal Consultants</title>
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
     <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <!-- ==========================================================================
-       1. TOP UTILITY BAR
-       ========================================================================== -->
-    <div class="top-bar">
-        <div class="container top-bar-container">
-            <div class="top-bar-info">
-                <span>📍 100 Financial Center, Floor 32, New York, NY</span>
-                <span>✉️ consult@apexlegal.com</span>
-            </div>
-            <div class="top-bar-emergency">
-                🚨 24/7 Priority Emergency Line: <strong>+1 (800) 555-LEGAL</strong>
-            </div>
-        </div>
-    </div>
-
-    <!-- ==========================================================================
-       2. HEADER & NAVIGATION
-       ========================================================================== -->
+    <!-- 1. NAVIGATION BAR & HEADER -->
     <header class="site-header">
         <div class="container header-container">
-            <a href="#home" class="brand-logo">
-                <div class="logo-icon">⚖️</div>
-                <div class="brand-text">
-                    <strong>APEX LEGAL</strong>
-                    <span>ATTORNEYS AT LAW</span>
+            <div class="logo">
+                <span class="logo-icon">⚖️</span>
+                <div class="logo-text">
+                    <span class="brand-name">APEX LEGAL</span>
+                    <span class="brand-tagline">ATTORNEYS AT LAW</span>
                 </div>
-            </a>
-
-            <nav class="navbar" id="navbar">
-                <ul class="nav-list">
-                    <li><a href="#home" class="nav-link active">Home</a></li>
-                    <li><a href="#practices" class="nav-link">Practice Areas</a></li>
-                    <li><a href="#case-estimator" class="nav-link">Fee Estimator</a></li>
-                    <li><a href="#attorneys" class="nav-link">Attorneys</a></li>
-                    <li><a href="#victories" class="nav-link">Case Victories</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
+            </div>
+            <nav class="navbar">
+                <ul class="nav-links">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about">About Firm</a></li>
+                    <li><a href="#practices">Practice Areas</a></li>
+                    <li><a href="#attorneys">Attorneys</a></li>
+                    <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
-
-            <div class="header-actions">
-                <button class="theme-toggle-btn" id="themeToggleBtn" title="Switch Theme">☀️</button>
-                <a href="#contact" class="btn btn-primary">Free Case Evaluation</a>
-                <button class="mobile-menu-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation">☰</button>
-            </div>
+            <a href="#contact" class="btn btn-primary">Free Consultation</a>
         </div>
     </header>
 
-    <!-- ==========================================================================
-       3. HERO SECTION
-       ========================================================================== -->
+    <!-- 2. MAIN CONTENT -->
     <main>
+        <!-- Hero Section -->
         <section id="home" class="hero-section">
             <div class="container">
                 <div class="hero-grid">
                     <div class="hero-content">
-                        <div class="hero-badge">
-                            ⚖️ Rated #1 Defense & Corporate Counsel 2026
-                        </div>
-                        <h1>Defending Your Rights With Uncompromising <span class="text-gold">Legal Excellence</span></h1>
-                        <p>Apex Legal Counsel provides strategic, aggressive, and result-oriented representation for corporate governance, criminal defense, intellectual property, and high-stakes litigation.</p>
-                        
-                        <div class="hero-cta">
+                        <span class="badge">⚖️ Rated #1 Defense & Corporate Counsel 2026</span>
+                        <h1>Dedicated Legal Excellence <span class="text-gold">You Can Trust</span></h1>
+                        <p>We provide strategic, aggressive, and result-oriented legal representation for corporate governance, criminal defense, intellectual property, and high-stakes civil litigation.</p>
+                        <div class="hero-actions">
                             <a href="#contact" class="btn btn-primary btn-large">Schedule Case Evaluation ➔</a>
                             <a href="#practices" class="btn btn-outline btn-large">Explore Practice Areas 📜</a>
-                        </div>
-
-                        <div class="hero-metrics-bar">
-                            <div class="metric-pill">
-                                <strong class="stat-number" data-target="25+">25+</strong>
-                                <span>Years Experience</span>
-                            </div>
-                            <div class="metric-pill">
-                                <strong class="stat-number" data-target="98.6%">98.6%</strong>
-                                <span>Case Win Rate</span>
-                            </div>
-                            <div class="metric-pill">
-                                <strong class="stat-number" data-target="$150M+">$150M+</strong>
-                                <span>Recovered For Clients</span>
-                            </div>
-                            <div class="metric-pill">
-                                <strong class="stat-number" data-target="500+">500+</strong>
-                                <span>Corporate Clients</span>
-                            </div>
                         </div>
                     </div>
 
                     <div class="hero-visual">
-                        <div class="hero-visual-card">
-                            <div class="victory-highlight-card">
-                                <span class="victory-badge">RECENT TRIAL VICTORY</span>
-                                <div class="victory-amount">$25,400,000</div>
-                                <div class="victory-desc">Corporate Contract Breach & Intellectual Property Theft Settlement won in Federal District Court.</div>
-                                <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border-color); display: flex; justify-content: space-between; font-size: 0.82rem; color: var(--text-muted);">
-                                    <span>Lead Trial Counsel: Alexander Vance</span>
-                                    <span>Verdict: August 2026</span>
-                                </div>
-                            </div>
+                        <div class="hero-card-preview">
+                            <span class="victory-tag">RECENT TRIAL VICTORY</span>
+                            <div class="victory-amount">$25,400,000</div>
+                            <div class="victory-title">Corporate Breach & Patent Infringement</div>
+                            <p>Full damages verdict secured for software client in Federal District Court against a Fortune 500 competitor.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ==========================================================================
-           4. ACCREDITATIONS BANNER
-           ========================================================================== -->
-        <section class="accreditations-banner">
-            <div class="container">
-                <div class="accreditations-flex">
-                    <div class="accreditation-item">🏛️ American Bar Association</div>
-                    <div class="accreditation-item">⭐ Super Lawyers Rated 2026</div>
-                    <div class="accreditation-item">🏆 Top 100 Trial Lawyers</div>
-                    <div class="accreditation-item">🛡️ Fortune 500 Counsel</div>
-                    <div class="accreditation-item">📜 National Trial Lawyers Fellow</div>
+        <!-- Stats Banner -->
+        <section class="stats-bar">
+            <div class="container stats-container">
+                <div class="stat-item">
+                    <span class="stat-number">25+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-label">Successful Cases</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">$150M+</span>
+                    <span class="stat-label">Recovered for Clients</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Corporate Clients</span>
                 </div>
             </div>
         </section>
 
-        <!-- ==========================================================================
-           5. PRACTICE AREAS
-           ========================================================================== -->
-        <section id="practices" class="section">
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <div class="section-title">
+                    <span class="badge">Our Foundation</span>
+                    <h2>About Our Firm</h2>
+                    <p>Over two decades of unyielding integrity, strategic litigation, and client commitment.</p>
+                </div>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <div class="card-icon">🏛️</div>
+                        <h3>Proven Courtroom Success</h3>
+                        <p>Our senior partners bring decades of federal and state jury trial experience, fighting relentlessly to protect your financial and legal rights.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="card-icon">🛡️</div>
+                        <h3>Confidential & Strategic</h3>
+                        <p>Every case is handled with 100% discretion and a customized litigation strategy engineered to achieve optimal legal resolutions.</p>
+                    </div>
+                    <div class="about-card">
+                        <div class="card-icon">📜</div>
+                        <h3>Client-First Advocacy</h3>
+                        <p>We prioritize transparent communication, clear billing structures, and 24/7 priority counsel for urgent legal matters.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Areas -->
+        <section id="practices" class="section bg-alt">
             <div class="container">
                 <div class="section-title">
                     <span class="badge">Legal Specializations</span>
-                    <h2>Comprehensive Practice Areas</h2>
-                    <p>Dedicated legal counsel tailored for complex corporate challenges and high-stakes individual defense.</p>
+                    <h2>Our Practice Areas</h2>
+                    <p>Comprehensive legal solutions tailored to your individual and corporate needs.</p>
                 </div>
-
-                <!-- Practice Tabs -->
-                <div class="practice-tabs">
-                    <button class="tab-btn active" data-category="all">All Practices</button>
-                    <button class="tab-btn" data-category="corporate">Corporate & M&A</button>
-                    <button class="tab-btn" data-category="criminal">Criminal Defense</button>
-                    <button class="tab-btn" data-category="family">Family & Estate</button>
-                    <button class="tab-btn" data-category="realestate">Real Estate</button>
-                </div>
-
-                <div class="practices-grid">
-                    <div class="practice-card" data-category="corporate">
-                        <div class="practice-icon">🏛️</div>
-                        <h3>Corporate Law & Governance</h3>
-                        <p>Business formation, mergers & acquisitions, regulatory compliance, contract negotiations, and corporate litigation.</p>
-                        <ul class="practice-features">
-                            <li>Mergers & Acquisitions Structuring</li>
-                            <li>Securities & SEC Compliance</li>
-                            <li>Executive Employment Contracts</li>
-                        </ul>
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">🏛️</div>
+                        <h3>Corporate Law</h3>
+                        <p>Business formation, mergers & acquisitions, regulatory compliance, contract negotiation, and dispute resolution.</p>
                     </div>
-
-                    <div class="practice-card" data-category="criminal">
-                        <div class="practice-icon">⚖️</div>
-                        <h3>Criminal Defense & White-Collar</h3>
-                        <p>Aggressive representation against felony charges, white-collar fraud, SEC investigations, and federal jury trials.</p>
-                        <ul class="practice-features">
-                            <li>White-Collar & Financial Fraud Defense</li>
-                            <li>Federal Jury Trial Litigation</li>
-                            <li>Grand Jury Subpoena Defense</li>
-                        </ul>
+                    <div class="card">
+                        <div class="card-icon">⚖️</div>
+                        <h3>Criminal Defense</h3>
+                        <p>Aggressive representation against felony charges, white-collar fraud, SEC investigations, and trial litigation.</p>
                     </div>
-
-                    <div class="practice-card" data-category="family">
-                        <div class="practice-icon">📜</div>
-                        <h3>Family Law & Estate Planning</h3>
-                        <p>Wills, revocable living trusts, asset protection, high-net-worth divorce proceedings, and child custody arrangements.</p>
-                        <ul class="practice-features">
-                            <li>High-Net-Worth Estate Trusts</li>
-                            <li>Complex Asset Division</li>
-                            <li>Pre-Nuptial Agreement Drafting</li>
-                        </ul>
+                    <div class="card">
+                        <div class="card-icon">📜</div>
+                        <h3>Family & Estate</h3>
+                        <p>Wills, trusts, asset protection, high-net-worth divorce proceedings, child custody, and estate planning.</p>
                     </div>
-
-                    <div class="practice-card" data-category="realestate">
-                        <div class="practice-icon">🏙️</div>
-                        <h3>Commercial Real Estate Law</h3>
-                        <p>Commercial property transactions, land zoning disputes, lease negotiation, and real estate development structuring.</p>
-                        <ul class="practice-features">
-                            <li>Commercial Property Acquisitions</li>
-                            <li>Zoning & Land Use Disputes</li>
-                            <li>Title & Contract Litigation</li>
-                        </ul>
+                    <div class="card">
+                        <div class="card-icon">🏙️</div>
+                        <h3>Real Estate Law</h3>
+                        <p>Commercial and residential property transactions, zoning disputes, leasing agreements, and title litigation.</p>
                     </div>
-
-                    <div class="practice-card" data-category="corporate">
-                        <div class="practice-icon">🔒</div>
-                        <h3>Intellectual Property & Cyber</h3>
-                        <p>Protecting patents, trademarks, trade secrets, and resolving complex digital copyright and data privacy disputes.</p>
-                        <ul class="practice-features">
-                            <li>Patent Infringement Litigation</li>
-                            <li>Global Trademark Registration</li>
-                            <li>Data Breach Liability Defense</li>
-                        </ul>
+                    <div class="card">
+                        <div class="card-icon">🔒</div>
+                        <h3>Intellectual Property</h3>
+                        <p>Trademarks, global patents, trade secret protection, and complex digital copyright infringement defense.</p>
                     </div>
-
-                    <div class="practice-card" data-category="criminal">
-                        <div class="practice-icon">🚗</div>
-                        <h3>Civil Litigation & Personal Injury</h3>
-                        <p>Relentless legal representation securing maximum compensation for severe injuries and wrongful death claims.</p>
-                        <ul class="practice-features">
-                            <li>Catastrophic Injury Claims</li>
-                            <li>100% Contingency (No Win, No Fee)</li>
-                            <li>Insurance Carrier Negotiations</li>
-                        </ul>
+                    <div class="card">
+                        <div class="card-icon">🛡️</div>
+                        <h3>Civil Litigation</h3>
+                        <p>Personal injury claims, contract disputes, liability defense, and catastrophic settlement negotiations.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ==========================================================================
-           6. INTERACTIVE CASE FEE ESTIMATOR
-           ========================================================================== -->
-        <section id="case-estimator" class="section" style="background: var(--bg-secondary);">
-            <div class="container">
-                <div class="section-title">
-                    <span class="badge">Transparent Billing</span>
-                    <h2>Case Recovery & Fee Estimator</h2>
-                    <p>Select your legal domain to estimate potential recovery values and fee structures.</p>
-                </div>
-
-                <div class="estimator-box">
-                    <div class="calc-grid">
-                        <div class="calc-form">
-                            <div class="form-group">
-                                <label class="form-label" for="calcCaseType">Select Practice Area / Legal Domain *</label>
-                                <select id="calcCaseType" class="form-control">
-                                    <option value="corporate" selected>Corporate Contract & M&A Dispute</option>
-                                    <option value="injury">Personal Injury / Settlement Claim</option>
-                                    <option value="criminal">Criminal Defense Trial Representation</option>
-                                    <option value="realestate">Commercial Real Estate Dispute</option>
-                                </select>
-                            </div>
-
-                            <div class="form-group" style="margin-top: 1.5rem;">
-                                <label class="form-label" for="calcComplexity">Case Scale / Estimated Claim Value</label>
-                                <select id="calcComplexity" class="form-control">
-                                    <option value="1">Standard Scope ($100k – $500k)</option>
-                                    <option value="2.5" selected>Medium Scope ($500k – $2.5M)</option>
-                                    <option value="5">High-Stakes Enterprise Scope ($2.5M+)</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="calc-result-card">
-                            <span style="font-size: 0.85rem; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Potential Case Outcome</span>
-                            <div class="estimated-fee-display" id="estimatedRecoveryDisplay">$2,500,000+ Est. Settlement</div>
-                            <div style="font-size: 0.95rem; color: var(--brand-gold-light); font-weight: 700; margin-bottom: 1.5rem;" id="estimatedFeeDisplay">Fee Model: Retainer & Hourly</div>
-                            
-                            <a href="#contact" class="btn btn-primary" style="width: 100%;">Schedule Case Evaluation ➔</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================================================
-           7. ATTORNEYS SHOWCASE
-           ========================================================================== -->
+        <!-- Attorneys Section -->
         <section id="attorneys" class="section">
             <div class="container">
                 <div class="section-title">
                     <span class="badge">Legal Leadership</span>
-                    <h2>Senior Partners & Counsel</h2>
-                    <p>Seasoned trial attorneys with decades of combined courtroom victories.</p>
+                    <h2>Senior Trial Attorneys</h2>
+                    <p>Experienced legal advocates dedicated to defending your rights.</p>
                 </div>
-
                 <div class="attorneys-grid">
                     <div class="attorney-card">
                         <div class="attorney-avatar">⚖️</div>
-                        <div class="attorney-body">
-                            <h3>Alexander Vance, Esq.</h3>
-                            <span class="attorney-title">Managing Partner — Corporate & M&A</span>
-                            <p>Former Federal Prosecutor with over 22 years of trial experience in high-stakes corporate litigation and antitrust defense.</p>
-                            <a href="#contact" class="btn btn-outline" style="width: 100%;">Request Consultation</a>
-                        </div>
+                        <h3>Alexander Vance, Esq.</h3>
+                        <span class="attorney-role">Managing Partner — Corporate & M&A</span>
+                        <p>22+ years trial experience specializing in corporate governance, mergers, and high-stakes business litigation.</p>
                     </div>
-
                     <div class="attorney-card">
                         <div class="attorney-avatar">🏛️</div>
-                        <div class="attorney-body">
-                            <h3>Victoria Sterling, Esq.</h3>
-                            <span class="attorney-title">Head of Criminal Defense</span>
-                            <p>Renowned defense litigator with an unprecedented 99.1% acquittal rate in federal jury trials and SEC proceedings.</p>
-                            <a href="#contact" class="btn btn-outline" style="width: 100%;">Request Consultation</a>
-                        </div>
+                        <h3>Victoria Sterling, Esq.</h3>
+                        <span class="attorney-role">Head of Criminal Defense</span>
+                        <p>Former federal prosecutor with a 98%+ acquittal rate in criminal trial defense and SEC proceedings.</p>
                     </div>
-
                     <div class="attorney-card">
-                        <div class="attorney-avatar">🔒</div>
-                        <div class="attorney-body">
-                            <h3>Marcus Thorne, Esq.</h3>
-                            <span class="attorney-title">Partner — IP & Cyber Litigation</span>
-                            <p>Specializes in patent infringement and trade secret protection for tech conglomerates across North America and Europe.</p>
-                            <a href="#contact" class="btn btn-outline" style="width: 100%;">Request Consultation</a>
-                        </div>
+                        <div class="attorney-avatar">📜</div>
+                        <h3>Marcus Thorne, Esq.</h3>
+                        <span class="attorney-role">Senior Partner — Family & Estate</span>
+                        <p>Specialist in high-net-worth estate planning, asset protection trusts, and complex family settlements.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ==========================================================================
-           8. PROVEN CASE VICTORIES
-           ========================================================================== -->
-        <section id="victories" class="section" style="background: var(--bg-secondary);">
+        <!-- Contact Section -->
+        <section id="contact" class="section bg-alt">
             <div class="container">
                 <div class="section-title">
-                    <span class="badge">Track Record</span>
-                    <h2>Proven Case Victories</h2>
-                    <p>A sample of recent verdict results secured for our clients.</p>
+                    <span class="badge">100% Confidential</span>
+                    <h2>Get Free Case Consultation</h2>
+                    <p>Speak directly with our senior attorneys today.</p>
                 </div>
-
-                <div class="victories-grid">
-                    <div class="victory-card">
-                        <span class="victory-tag">VERDICT: $25.4 MILLION</span>
-                        <h3>Corporate Breach & Patent Infringement</h3>
-                        <p>Secured full damages verdict for software client after a 3-week federal jury trial against a Fortune 500 competitor.</p>
-                    </div>
-
-                    <div class="victory-card">
-                        <span class="victory-tag">OUTCOME: FULL DISMISSAL</span>
-                        <h3>Federal Securities Fraud Charges</h3>
-                        <p>Successfully achieved full acquittal and dismissal of all criminal counts for corporate executive before trial.</p>
-                    </div>
-
-                    <div class="victory-card">
-                        <span class="victory-tag">SETTLEMENT: $12.8 MILLION</span>
-                        <h3>Commercial Real Estate Contract Dispute</h3>
-                        <p>Negotiated landmark settlement resolving multi-party commercial land zoning and title inheritance litigation.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==========================================================================
-           9. CONSULTATION & CASE EVALUATION FORM
-           ========================================================================== -->
-        <section id="contact" class="section">
-            <div class="container">
-                <div class="contact-grid">
-                    <div class="contact-info">
-                        <span class="badge">100% Confidential</span>
-                        <h2>Get Free Case Consultation</h2>
-                        <p>Speak directly with our senior partners. All communications are strictly protected under Attorney-Client Privilege.</p>
-
-                        <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1.5rem;">
-                            <div style="display: flex; gap: 1rem; align-items: center;">
-                                <div style="width: 44px; height: 44px; border-radius: var(--radius-sm); background: rgba(197, 160, 89, 0.15); color: var(--brand-gold-light); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">📍</div>
-                                <div>
-                                    <strong>New York Office</strong>
-                                    <span style="font-size: 0.9rem; color: var(--text-secondary); display: block;">100 Financial Center, Floor 32, New York, NY 10036</span>
-                                </div>
-                            </div>
-
-                            <div style="display: flex; gap: 1rem; align-items: center;">
-                                <div style="width: 44px; height: 44px; border-radius: var(--radius-sm); background: rgba(197, 160, 89, 0.15); color: var(--brand-gold-light); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">📞</div>
-                                <div>
-                                    <strong>Direct Phone</strong>
-                                    <span style="font-size: 0.9rem; color: var(--text-secondary); display: block;">+1 (800) 555-LEGAL / +1 (212) 555-0199</span>
-                                </div>
-                            </div>
-
-                            <div style="display: flex; gap: 1rem; align-items: center;">
-                                <div style="width: 44px; height: 44px; border-radius: var(--radius-sm); background: rgba(197, 160, 89, 0.15); color: var(--brand-gold-light); display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">✉️</div>
-                                <div>
-                                    <strong>Confidential Email</strong>
-                                    <span style="font-size: 0.9rem; color: var(--text-secondary); display: block;">consult@apexlegal.com</span>
-                                </div>
-                            </div>
+                <div class="contact-box">
+                    <form class="contact-form" id="consultationForm">
+                        <div class="form-row">
+                            <input type="text" placeholder="Your Full Name" required>
+                            <input type="email" placeholder="Email Address" required>
                         </div>
-                    </div>
-
-                    <!-- Contact Form Box -->
-                    <div class="contact-form-box">
-                        <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 1.5rem;">Request Case Evaluation</h3>
-                        <form id="caseEvaluationForm">
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label class="form-label" for="clientName">Full Name *</label>
-                                    <input type="text" id="clientName" class="form-control" placeholder="John Doe" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="clientEmail">Email Address *</label>
-                                    <input type="email" id="clientEmail" class="form-control" placeholder="john@example.com" required>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label class="form-label" for="clientPhone">Phone Number *</label>
-                                    <input type="tel" id="clientPhone" class="form-control" placeholder="+1 (555) 019-2831" required>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="practiceArea">Practice Area *</label>
-                                    <select id="practiceArea" class="form-control" required>
-                                        <option value="">Select Practice Area...</option>
-                                        <option value="corporate">Corporate Law & Governance</option>
-                                        <option value="criminal">Criminal Defense & Trial</option>
-                                        <option value="family">Family & Estate Planning</option>
-                                        <option value="realestate">Real Estate & Commercial</option>
-                                        <option value="ip">Intellectual Property & Cyber</option>
-                                        <option value="injury">Civil Litigation & Injury</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="consultDate">Preferred Consultation Date & Time</label>
-                                <input type="datetime-local" id="consultDate" class="form-control">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="caseSummary">Brief Case Summary</label>
-                                <textarea id="caseSummary" class="form-control" placeholder="Describe the key facts or legal questions..."></textarea>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Confidential Evaluation Request ➔</button>
-                        </form>
-                    </div>
+                        <div class="form-row">
+                            <input type="tel" placeholder="Phone Number" required>
+                            <select required>
+                                <option value="" disabled selected>Select Practice Area</option>
+                                <option>Corporate Law</option>
+                                <option>Criminal Defense</option>
+                                <option>Family & Estate</option>
+                                <option>Real Estate Law</option>
+                                <option>Intellectual Property</option>
+                                <option>Civil Litigation</option>
+                            </select>
+                        </div>
+                        <textarea rows="4" placeholder="Briefly describe your case..." required></textarea>
+                        <button type="submit" class="btn btn-primary btn-block">Request Consultation ➔</button>
+                    </form>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- ==========================================================================
-       10. FOOTER
-       ========================================================================== -->
+    <!-- 3. FOOTER -->
     <footer class="site-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="#home" class="brand-logo" style="margin-bottom: 1rem;">
-                        <div class="logo-icon">⚖️</div>
-                        <div class="brand-text">
-                            <strong>APEX LEGAL</strong>
-                            <span>ATTORNEYS AT LAW</span>
-                        </div>
-                    </a>
-                    <p>Providing trusted, aggressive legal counsel with unyielding integrity and excellence for over two decades.</p>
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <div class="logo">
+                    <span class="logo-icon">⚖️</span>
+                    <div class="logo-text">
+                        <span class="brand-name">APEX LEGAL</span>
+                    </div>
                 </div>
-
-                <div class="footer-col">
-                    <h4>Practice Areas</h4>
-                    <ul class="footer-links">
-                        <li><a href="#practices">Corporate Law</a></li>
-                        <li><a href="#practices">Criminal Defense</a></li>
-                        <li><a href="#practices">Family & Estate</a></li>
-                        <li><a href="#practices">Real Estate Law</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Quick Links</h4>
-                    <ul class="footer-links">
-                        <li><a href="#case-estimator">Fee Estimator</a></li>
-                        <li><a href="#attorneys">Senior Partners</a></li>
-                        <li><a href="#victories">Case Victories</a></li>
-                        <li><a href="#contact">Contact Us</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col">
-                    <h4>Legal Disclosures</h4>
-                    <ul class="footer-links">
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Attorney Advertising Notice</a></li>
-                        <li><a href="#">Disclaimer & Terms</a></li>
-                        <li><a href="#">Bar Registration</a></li>
-                    </ul>
-                </div>
+                <p>Providing trusted legal counsel with integrity and excellence for over two decades.</p>
             </div>
-
-            <div class="footer-bottom">
-                <p>© 2026 Apex Legal Counsel LLP. All rights reserved.</p>
-                <p>Attorney Advertising — Prior Results Do Not Guarantee A Similar Outcome</p>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#practices">Practice Areas</a></li>
+                    <li><a href="#attorneys">Attorneys</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contact Info</h4>
+                <p>📍 100 Financial Center, Suite 500</p>
+                <p>📞 +1 (800) 555-LEGAL</p>
+                <p>✉️ info@apexlegal.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <p>&copy; 2026 Apex Legal Counsel. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- ==========================================================================
-       11. MODAL
-       ========================================================================== -->
-    <div class="modal-overlay" id="successModal">
-        <div class="modal-box" style="text-align: center;">
-            <div style="font-size: 3.5rem; margin-bottom: 1rem;">⚖️</div>
-            <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 0.75rem;">Case Evaluation Request Received</h3>
-            <p style="color: var(--text-secondary); font-size: 0.98rem; margin-bottom: 1.75rem; line-height: 1.6;">
-                Thank you for reaching out to Apex Legal Counsel. Your inquiry is strictly confidential. A Senior Partner will review your case summary and contact you within 2 business hours.
-            </p>
-            <button class="btn btn-primary" id="closeSuccessBtn">Return to Law Firm Website</button>
-        </div>
-    </div>
+    <!-- 4. CHAT WIDGET (REUSABLE COMPONENT & EXACT ORIGINAL IDs) -->
+    <div id="chat-widget" class="chat-widget">
+        <!-- Floating Launcher Button -->
+        <button id="chat-launcher" class="chat-launcher" aria-label="Open Chat">
+            <span class="chat-icon">💬</span>
+            <span class="chat-badge">1</span>
+        </button>
 
-    <!-- ==========================================================================
-       12. VIRTUAL LEGAL ASSISTANT CHAT WIDGET
-       ========================================================================== -->
-    <button class="chat-widget-btn" id="chatToggleBtn" title="Apex Legal Assistant">
-        💬
-    </button>
-
-    <div class="chat-window" id="chatWindow">
-        <div class="chat-header">
-            <div class="chat-header-info">
+        <!-- Chat Popup Window -->
+        <div id="chat-window" class="chat-window hidden">
+            <!-- Chat Header -->
+            <div class="chat-header">
                 <div class="chat-avatar">⚖️</div>
-                <div>
-                    <strong>Legal Assistant</strong>
-                    <span>● Online</span>
+                <div class="chat-title-area">
+                    <div class="chat-title">Legal Assistant</div>
+                    <div class="chat-status"><span class="status-dot"></span> Online • Instant Reply</div>
                 </div>
+                <button id="chat-close" class="chat-close-btn">&times;</button>
             </div>
-            <button style="background: none; border: none; color: var(--text-muted); cursor: pointer; font-size: 1.2rem;" id="chatCloseBtn">✕</button>
-        </div>
 
-        <div class="chat-body" id="chatBody">
-            <!-- Dynamic Messages -->
-        </div>
+            <!-- Chat Messages Container -->
+            <div id="chat-messages" class="chat-messages">
+                <!-- Messages will be populated dynamically by chat-widget.js -->
+            </div>
 
-        <div class="chat-footer">
-            <input type="text" id="chatInput" placeholder="Ask a legal question or select an option...">
-            <button id="chatSendBtn">Send</button>
+            <!-- Chat Input Area -->
+            <form id="chat-form" class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Type your legal question..." autocomplete="off" required>
+                <button type="submit" id="chat-send" class="chat-send-btn">Send</button>
+            </form>
         </div>
     </div>
 
-    <!-- JavaScript Files -->
-    <script src="js/main.js"></script>
+    <!-- Scripts -->
     <script src="js/chat-widget.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

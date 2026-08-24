@@ -1,185 +1,128 @@
-/**
- * Apex Legal Counsel - Virtual Legal Assistant Chat Widget (with Webhook Integration)
- */
+/* ==========================================================================
+   APEX LEGAL COUNSEL - CHAT WIDGET (WITH WEBHOOK SUPPORT)
+   ========================================================================== */
 
+// 1. CONFIGURATION
 const CHAT_CONFIG = {
-    webhookUrl: "https://n8n.srv1237736.hstgr.cloud/webhook/59bac47e-c7f2-473f-9de5-b29d8b6283dc",
-    botName: "Apex Legal Assistant"
+    webhookUrl: "https://n8n.srv1237736.hstgr.cloud/webhook/59bac47e-c7f2-473f-9de5-b29d8b6283dc", 
+    botName: "Legal Assistant",
+    initialMessage: "Welcome to Apex Legal Counsel ⚖️. How can our legal team assist you today?"
 };
 
+// 2. DOM ELEMENTS
 document.addEventListener('DOMContentLoaded', () => {
-    initLegalChatWidget();
-});
+    const chatLauncher = document.getElementById('chat-launcher');
+    const chatWindow = document.getElementById('chat-window');
+    const chatClose = document.getElementById('chat-close');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    const chatBadge = document.querySelector('.chat-badge');
 
-function initLegalChatWidget() {
-    const chatToggleBtn = document.getElementById('chatToggleBtn');
-    const chatWindow = document.getElementById('chatWindow');
-    const chatCloseBtn = document.getElementById('chatCloseBtn');
-    const chatBody = document.getElementById('chatBody');
-    const chatInput = document.getElementById('chatInput');
-    const chatSendBtn = document.getElementById('chatSendBtn');
+    if (!chatLauncher || !chatWindow) return;
 
-    if (!chatToggleBtn || !chatWindow) return;
+    // Show initial welcome message
+    appendMessage(CHAT_CONFIG.initialMessage, 'bot');
 
-    chatToggleBtn.addEventListener('click', () => {
-        chatWindow.classList.toggle('open');
+    // Toggle Chat Window
+    chatLauncher.addEventListener('click', () => {
+        chatWindow.classList.toggle('hidden');
+        if (chatBadge) chatBadge.style.display = 'none'; // Clear badge
     });
 
-    if (chatCloseBtn) {
-        chatCloseBtn.addEventListener('click', () => {
-            chatWindow.classList.remove('open');
+    if (chatClose) {
+        chatClose.addEventListener('click', () => {
+            chatWindow.classList.add('hidden');
         });
     }
 
-    let firstOpen = true;
-    chatToggleBtn.addEventListener('click', () => {
-        if (firstOpen) {
-            firstOpen = false;
-            setTimeout(() => {
-                appendBotMessage("Welcome to Apex Legal Counsel ⚖️. I'm your Virtual Legal Assistant. How can our legal team assist you today?", [
-                    "Explore Practice Areas",
-                    "Schedule Consultation",
-                    "Fee Structure & Pricing",
-                    "24/7 Emergency Hotline"
-                ]);
-            }, 300);
-        }
-    });
+    // Send Message & Webhook Call
+    if (chatForm) {
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userText = chatInput.value.trim();
+            if (!userText) return;
 
-    function handleUserSend() {
-        const text = chatInput.value.trim();
-        if (!text) return;
+            // A. Show User Message in UI
+            appendMessage(userText, 'user');
+            chatInput.value = '';
 
-        appendUserMessage(text);
-        chatInput.value = '';
+            // B. Show Typing Indicator
+            const typingId = showTypingIndicator();
 
-        processBotResponse(text);
-    }
-
-    if (chatSendBtn) chatSendBtn.addEventListener('click', handleUserSend);
-
-    if (chatInput) {
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleUserSend();
-        });
-    }
-
-    chatBody.addEventListener('click', (e) => {
-        if (e.target.classList.contains('chat-opt-btn')) {
-            const optionText = e.target.textContent;
-            appendUserMessage(optionText);
-            processBotResponse(optionText);
-        }
-    });
-
-    function appendUserMessage(text) {
-        const msgDiv = document.createElement('div');
-        msgDiv.className = 'chat-msg user';
-        msgDiv.textContent = text;
-        chatBody.appendChild(msgDiv);
-        scrollToBottom();
-    }
-
-    function appendBotMessage(text, options = []) {
-        const msgDiv = document.createElement('div');
-        msgDiv.className = 'chat-msg bot';
-        
-        let html = `<p>${escapeHtml(text)}</p>`;
-
-        if (options && options.length > 0) {
-            html += `<div class="chat-options">`;
-            options.forEach(opt => {
-                html += `<button class="chat-opt-btn">${escapeHtml(opt)}</button>`;
-            });
-            html += `</div>`;
-        }
-
-        msgDiv.innerHTML = html;
-        chatBody.appendChild(msgDiv);
-        scrollToBottom();
-    }
-
-    async function processBotResponse(query) {
-        const q = query.toLowerCase();
-
-        // Show typing indicator
-        const typingDiv = document.createElement('div');
-        typingDiv.className = 'chat-msg bot typing';
-        typingDiv.innerHTML = '<em>Legal Assistant is typing...</em>';
-        chatBody.appendChild(typingDiv);
-        scrollToBottom();
-
-        // Try Webhook POST request first
-        if (CHAT_CONFIG.webhookUrl) {
+            // C. Send Message to Webhook
             try {
-                const response = await fetch(CHAT_CONFIG.webhookUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        message: query,
-                        timestamp: new Date().toISOString(),
-                        source: 'lawfirm_website'
-                    })
-                });
+                if (CHAT_CONFIG.webhookUrl) {
+                    const response = await fetch(CHAT_CONFIG.webhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            message: userText,
+                            timestamp: new Date().toISOString(),
+                            source: 'lawfirm_website'
+                        })
+                    });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    typingDiv.remove();
+                    if (response.ok) {
+                        const data = await response.json();
+                        removeTypingIndicator(typingId);
 
-                    let replyText = data.reply || data.output || data.message || data.response || data.text;
-                    if (!replyText && typeof data === 'string') replyText = data;
+                        let replyText = data.reply || data.output || data.message || data.response || data.text;
+                        if (!replyText && typeof data === 'string') replyText = data;
 
-                    if (replyText) {
-                        appendBotMessage(replyText);
-                        return;
+                        if (replyText) {
+                            appendMessage(replyText, 'bot');
+                            return;
+                        }
                     }
                 }
-            } catch (err) {
-                console.log('Webhook offline/fallback to client logic:', err);
+            } catch (error) {
+                console.log('Webhook error, falling back to local handler:', error);
             }
-        }
 
-        // Local fallback logic
-        setTimeout(() => {
-            typingDiv.remove();
+            // D. Fallback Bot Response
+            setTimeout(() => {
+                removeTypingIndicator(typingId);
+                const q = userText.toLowerCase();
 
-            if (q.includes('practice') || q.includes('area') || q.includes('service')) {
-                appendBotMessage(
-                    "Our senior partners handle 6 core practice areas:\n1. Corporate Law & Mergers\n2. Criminal Defense & Litigation\n3. Family & Estate Planning\n4. Real Estate Transactions\n5. IP & Cyber Law\n6. Civil Litigation.",
-                    ["Schedule Consultation", "Fee Structure & Pricing"]
-                );
-            } else if (q.includes('fee') || q.includes('price') || q.includes('cost') || q.includes('contingency')) {
-                appendBotMessage(
-                    "Personal Injury cases are handled on a 100% Contingency Fee basis (No win, no fee). Corporate and Defense litigation are structured via flat retainers or transparent hourly rates.",
-                    ["Try Case Estimator", "Schedule Consultation"]
-                );
-            } else if (q.includes('try case estimator')) {
-                window.location.hash = '#case-estimator';
-                chatWindow.classList.remove('open');
-            } else if (q.includes('emergency') || q.includes('hotline') || q.includes('urgent')) {
-                appendBotMessage(
-                    "For urgent criminal defense or court emergencies, please call our 24/7 Priority Legal Line immediately at +1 (800) 555-LEGAL.",
-                    ["Schedule Consultation"]
-                );
-            } else if (q.includes('schedule') || q.includes('consultation') || q.includes('book') || q.includes('attorney')) {
-                appendBotMessage(
-                    "You can request a 100% confidential 30-minute case evaluation directly through our Case Evaluation Form!",
-                    ["Go to Contact Form"]
-                );
-            } else if (q.includes('go to contact form')) {
-                window.location.hash = '#contact';
-                chatWindow.classList.remove('open');
-            } else {
-                appendBotMessage(
-                    "Thank you for contacting Apex Legal Counsel. Our legal team is committed to defending your rights with aggressive, strategic representation.",
-                    ["Explore Practice Areas", "Schedule Consultation"]
-                );
-            }
-        }, 600);
+                if (q.includes('practice') || q.includes('area') || q.includes('service')) {
+                    appendMessage("Our firm specializes in Corporate Law, Criminal Defense, Family & Estate Planning, Real Estate, Intellectual Property, and Civil Litigation.", 'bot');
+                } else if (q.includes('consultation') || q.includes('contact') || q.includes('appointment')) {
+                    appendMessage("You can request a free consultation using our contact form on this page or call us 24/7 at +1 (800) 555-LEGAL.", 'bot');
+                } else {
+                    appendMessage("Thank you for your inquiry! One of our senior legal associates will assist you promptly.", 'bot');
+                }
+            }, 600);
+        });
     }
 
-    function scrollToBottom() {
-        chatBody.scrollTop = chatBody.scrollHeight;
+    function appendMessage(text, sender) {
+        const msgDiv = document.createElement('div');
+        msgDiv.classList.add('msg', sender === 'user' ? 'msg-user' : 'msg-bot');
+
+        const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        msgDiv.innerHTML = `${escapeHtml(text)} <div class="msg-time">${timeStr}</div>`;
+
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function showTypingIndicator() {
+        const id = 'typing-' + Date.now();
+        const typingDiv = document.createElement('div');
+        typingDiv.id = id;
+        typingDiv.classList.add('msg', 'msg-bot', 'typing-indicator');
+        typingDiv.innerText = `${CHAT_CONFIG.botName} is typing...`;
+        chatMessages.appendChild(typingDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+        return id;
+    }
+
+    function removeTypingIndicator(id) {
+        const el = document.getElementById(id);
+        if (el) el.remove();
     }
 
     function escapeHtml(text) {
@@ -187,4 +130,4 @@ function initLegalChatWidget() {
         div.textContent = text;
         return div.innerHTML;
     }
-}
+});
