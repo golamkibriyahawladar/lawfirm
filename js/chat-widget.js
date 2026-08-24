@@ -1,6 +1,11 @@
 /**
- * Apex Legal Counsel - Virtual Legal Assistant Chat Widget
+ * Apex Legal Counsel - Virtual Legal Assistant Chat Widget (with Webhook Integration)
  */
+
+const CHAT_CONFIG = {
+    webhookUrl: "https://n8n.srv1237736.hstgr.cloud/webhook/59bac47e-c7f2-473f-9de5-b29d8b6283dc",
+    botName: "Apex Legal Assistant"
+};
 
 document.addEventListener('DOMContentLoaded', () => {
     initLegalChatWidget();
@@ -79,12 +84,12 @@ function initLegalChatWidget() {
         const msgDiv = document.createElement('div');
         msgDiv.className = 'chat-msg bot';
         
-        let html = `<p>${text}</p>`;
+        let html = `<p>${escapeHtml(text)}</p>`;
 
         if (options && options.length > 0) {
             html += `<div class="chat-options">`;
             options.forEach(opt => {
-                html += `<button class="chat-opt-btn">${opt}</button>`;
+                html += `<button class="chat-opt-btn">${escapeHtml(opt)}</button>`;
             });
             html += `</div>`;
         }
@@ -94,15 +99,47 @@ function initLegalChatWidget() {
         scrollToBottom();
     }
 
-    function processBotResponse(query) {
+    async function processBotResponse(query) {
         const q = query.toLowerCase();
 
+        // Show typing indicator
         const typingDiv = document.createElement('div');
         typingDiv.className = 'chat-msg bot typing';
         typingDiv.innerHTML = '<em>Legal Assistant is typing...</em>';
         chatBody.appendChild(typingDiv);
         scrollToBottom();
 
+        // Try Webhook POST request first
+        if (CHAT_CONFIG.webhookUrl) {
+            try {
+                const response = await fetch(CHAT_CONFIG.webhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: query,
+                        timestamp: new Date().toISOString(),
+                        source: 'lawfirm_website'
+                    })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    typingDiv.remove();
+
+                    let replyText = data.reply || data.output || data.message || data.response || data.text;
+                    if (!replyText && typeof data === 'string') replyText = data;
+
+                    if (replyText) {
+                        appendBotMessage(replyText);
+                        return;
+                    }
+                }
+            } catch (err) {
+                console.log('Webhook offline/fallback to client logic:', err);
+            }
+        }
+
+        // Local fallback logic
         setTimeout(() => {
             typingDiv.remove();
 
@@ -138,10 +175,16 @@ function initLegalChatWidget() {
                     ["Explore Practice Areas", "Schedule Consultation"]
                 );
             }
-        }, 700);
+        }, 600);
     }
 
     function scrollToBottom() {
         chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
     }
 }
