@@ -1,129 +1,147 @@
-/* ==========================================================================
-   REUSABLE CHAT WIDGET JS
-   ========================================================================== */
+/**
+ * Apex Legal Counsel - Virtual Legal Assistant Chat Widget
+ */
 
-// 1. CONFIGURATION (Paste your Webhook URL here!)
-const CHAT_CONFIG = {
-    // ⬇️ Paste your Webhook URL inside the quotes below ⬇️
-    webhookUrl: "https://n8n.srv1237736.hstgr.cloud/webhook/59bac47e-c7f2-473f-9de5-b29d8b6283dc",
-    botName: "Legal Assistant",
-    initialMessage: "Welcome to Apex Legal Counsel. How can our legal team assist you today?"
-};
-
-// 2. DOM ELEMENTS
-const chatLauncher = document.getElementById('chat-launcher');
-const chatWindow = document.getElementById('chat-window');
-const chatClose = document.getElementById('chat-close');
-const chatMessages = document.getElementById('chat-messages');
-const chatForm = document.getElementById('chat-form');
-const chatInput = document.getElementById('chat-input');
-const chatBadge = document.querySelector('.chat-badge');
-
-// 3. INITIALIZE WIDGET
 document.addEventListener('DOMContentLoaded', () => {
-    // Show initial welcome message
-    appendMessage(CHAT_CONFIG.initialMessage, 'bot');
+    initLegalChatWidget();
 });
 
-// Toggle Chat Window
-chatLauncher.addEventListener('click', () => {
-    chatWindow.classList.toggle('hidden');
-    if (chatBadge) chatBadge.style.display = 'none'; // Clear badge
-});
+function initLegalChatWidget() {
+    const chatToggleBtn = document.getElementById('chatToggleBtn');
+    const chatWindow = document.getElementById('chatWindow');
+    const chatCloseBtn = document.getElementById('chatCloseBtn');
+    const chatBody = document.getElementById('chatBody');
+    const chatInput = document.getElementById('chatInput');
+    const chatSendBtn = document.getElementById('chatSendBtn');
 
-chatClose.addEventListener('click', () => {
-    chatWindow.classList.add('hidden');
-});
+    if (!chatToggleBtn || !chatWindow) return;
 
-// 4. SEND MESSAGE & WEBHOOK CALL
-chatForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const userText = chatInput.value.trim();
-    if (!userText) return;
+    chatToggleBtn.addEventListener('click', () => {
+        chatWindow.classList.toggle('open');
+    });
 
-    // A. Show User Message in UI
-    appendMessage(userText, 'user');
-    chatInput.value = '';
-
-    // B. Show Typing Indicator
-    const typingId = showTypingIndicator();
-
-    // C. Send Message to Webhook
-    try {
-        if (!CHAT_CONFIG.webhookUrl) {
-            // Demo Fallback Response if Webhook URL is not set yet
-            setTimeout(() => {
-                removeTypingIndicator(typingId);
-                appendMessage("Thank you for your message! Please configure your Webhook URL in `js/chat-widget.js` to receive live automated/AI responses.", 'bot');
-            }, 1000);
-            return;
-        }
-
-        // HTTP POST Request to Webhook
-        const response = await fetch(CHAT_CONFIG.webhookUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                message: userText,
-                timestamp: new Date().toISOString()
-            })
+    if (chatCloseBtn) {
+        chatCloseBtn.addEventListener('click', () => {
+            chatWindow.classList.remove('open');
         });
+    }
 
-        const data = await response.json();
-        removeTypingIndicator(typingId);
+    let firstOpen = true;
+    chatToggleBtn.addEventListener('click', () => {
+        if (firstOpen) {
+            firstOpen = false;
+            setTimeout(() => {
+                appendBotMessage("Welcome to Apex Legal Counsel ⚖️. I'm your Virtual Legal Assistant. How can our legal team assist you today?", [
+                    "Explore Practice Areas",
+                    "Schedule Consultation",
+                    "Fee Structure & Pricing",
+                    "24/7 Emergency Hotline"
+                ]);
+            }, 300);
+        }
+    });
 
-        // D. Extract Response Message from Webhook Payload
-        // Checks common response keys: reply, output, message, text, or raw string
-        let replyText = data.reply || data.output || data.message || data.response || data.text;
+    function handleUserSend() {
+        const text = chatInput.value.trim();
+        if (!text) return;
 
-        if (!replyText && typeof data === 'string') {
-            replyText = data;
-        } else if (!replyText) {
-            replyText = JSON.stringify(data);
+        appendUserMessage(text);
+        chatInput.value = '';
+
+        processBotResponse(text);
+    }
+
+    if (chatSendBtn) chatSendBtn.addEventListener('click', handleUserSend);
+
+    if (chatInput) {
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleUserSend();
+        });
+    }
+
+    chatBody.addEventListener('click', (e) => {
+        if (e.target.classList.contains('chat-opt-btn')) {
+            const optionText = e.target.textContent;
+            appendUserMessage(optionText);
+            processBotResponse(optionText);
+        }
+    });
+
+    function appendUserMessage(text) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'chat-msg user';
+        msgDiv.textContent = text;
+        chatBody.appendChild(msgDiv);
+        scrollToBottom();
+    }
+
+    function appendBotMessage(text, options = []) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'chat-msg bot';
+        
+        let html = `<p>${text}</p>`;
+
+        if (options && options.length > 0) {
+            html += `<div class="chat-options">`;
+            options.forEach(opt => {
+                html += `<button class="chat-opt-btn">${opt}</button>`;
+            });
+            html += `</div>`;
         }
 
-        // E. Show Webhook Response in Chat
-        appendMessage(replyText, 'bot');
-
-    } catch (error) {
-        console.error('Webhook Error:', error);
-        removeTypingIndicator(typingId);
-        appendMessage("Sorry, I am having trouble connecting to the server. Please try again later.", 'bot');
+        msgDiv.innerHTML = html;
+        chatBody.appendChild(msgDiv);
+        scrollToBottom();
     }
-});
 
-// 5. HELPER FUNCTIONS
-function appendMessage(text, sender) {
-    const msgDiv = document.createElement('div');
-    msgDiv.classList.add('msg', sender === 'user' ? 'msg-user' : 'msg-bot');
+    function processBotResponse(query) {
+        const q = query.toLowerCase();
 
-    const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    msgDiv.innerHTML = `${escapeHtml(text)} <div class="msg-time">${timeStr}</div>`;
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'chat-msg bot typing';
+        typingDiv.innerHTML = '<em>Legal Assistant is typing...</em>';
+        chatBody.appendChild(typingDiv);
+        scrollToBottom();
 
-    chatMessages.appendChild(msgDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight; // Auto scroll to bottom
-}
+        setTimeout(() => {
+            typingDiv.remove();
 
-function showTypingIndicator() {
-    const id = 'typing-' + Date.now();
-    const typingDiv = document.createElement('div');
-    typingDiv.id = id;
-    typingDiv.classList.add('msg', 'msg-bot', 'typing-indicator');
-    typingDiv.innerText = `${CHAT_CONFIG.botName} is typing...`;
-    chatMessages.appendChild(typingDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-    return id;
-}
+            if (q.includes('practice') || q.includes('area') || q.includes('service')) {
+                appendBotMessage(
+                    "Our senior partners handle 6 core practice areas:\n1. Corporate Law & Mergers\n2. Criminal Defense & Litigation\n3. Family & Estate Planning\n4. Real Estate Transactions\n5. IP & Cyber Law\n6. Civil Litigation.",
+                    ["Schedule Consultation", "Fee Structure & Pricing"]
+                );
+            } else if (q.includes('fee') || q.includes('price') || q.includes('cost') || q.includes('contingency')) {
+                appendBotMessage(
+                    "Personal Injury cases are handled on a 100% Contingency Fee basis (No win, no fee). Corporate and Defense litigation are structured via flat retainers or transparent hourly rates.",
+                    ["Try Case Estimator", "Schedule Consultation"]
+                );
+            } else if (q.includes('try case estimator')) {
+                window.location.hash = '#case-estimator';
+                chatWindow.classList.remove('open');
+            } else if (q.includes('emergency') || q.includes('hotline') || q.includes('urgent')) {
+                appendBotMessage(
+                    "For urgent criminal defense or court emergencies, please call our 24/7 Priority Legal Line immediately at +1 (800) 555-LEGAL.",
+                    ["Schedule Consultation"]
+                );
+            } else if (q.includes('schedule') || q.includes('consultation') || q.includes('book') || q.includes('attorney')) {
+                appendBotMessage(
+                    "You can request a 100% confidential 30-minute case evaluation directly through our Case Evaluation Form!",
+                    ["Go to Contact Form"]
+                );
+            } else if (q.includes('go to contact form')) {
+                window.location.hash = '#contact';
+                chatWindow.classList.remove('open');
+            } else {
+                appendBotMessage(
+                    "Thank you for contacting Apex Legal Counsel. Our legal team is committed to defending your rights with aggressive, strategic representation.",
+                    ["Explore Practice Areas", "Schedule Consultation"]
+                );
+            }
+        }, 700);
+    }
 
-function removeTypingIndicator(id) {
-    const el = document.getElementById(id);
-    if (el) el.remove();
-}
-
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
+    function scrollToBottom() {
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
 }
