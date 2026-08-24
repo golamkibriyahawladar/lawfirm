@@ -4,9 +4,9 @@
 
 // 1. CONFIGURATION
 const CHAT_CONFIG = {
-    webhookUrl: "https://n8n.srv1237736.hstgr.cloud/webhook/59bac47e-c7f2-473f-9de5-b29d8b6283dc", 
+    webhookUrl: "https://n8n.srv1237736.hstgr.cloud/webhook/59bac47e-c7f2-473f-9de5-b29d8b6283dc",
     botName: "Legal Assistant",
-    initialMessage: "Welcome to Apex Legal Counsel ⚖️. How can our legal team assist you today?"
+    initialMessage: "Hi, I can help you schedule a consultation and collect some basic information."
 };
 
 // 2. DOM ELEMENTS
